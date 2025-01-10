@@ -104,7 +104,7 @@ def get_list_of_target_entities(url):
     else:
         print("Failed to retrieve page content")
     return result_list
-    
+
 
 def get_same_texts(target, url, list_of_target_entities):
     """
@@ -172,9 +172,7 @@ def create_comment_on_pr(pull_request, answer):
     try:
         comment = generate_comment(answer)
         print(comment)
-        # only post comment if running on Github Actions
-        if os.environ.get("GITHUB_ACTIONS") == "true":
-            pull_request.create_issue_comment(comment)
+        pull_request.create_issue_comment(comment)
     except Exception as e:
         print(f"Error creating a comment on PR: {e}")
 
@@ -202,7 +200,7 @@ If the texts say the same thing, return True.  Output should be machine-readable
 def main():
     args = parse_cli_args()
     openai.api_key = args.API_key
-    
+
     with open('tools/article_checker/config.json', 'r') as config_file:
         config = json.load(config_file)
 
@@ -215,7 +213,8 @@ def main():
     diff = parse_diff(_diff)
     new_text, target = new_text_handler(diff)
     list_of_target_entities = get_list_of_target_entities(target_entities_url)
-    href_list = get_same_texts(target, target_entities_url, list_of_target_entities)
+    href_list = get_same_texts(
+        target, target_entities_url, list_of_target_entities)
     if href_list:
         answer = compare_texts(href_list, main_url, new_text, PROMPT, config)
         print(answer)

@@ -1,0 +1,14 @@
+name = "article-checker-worker"
+main = "src/worker.ts"
+compatibility_date = "2024-01-09"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+# These are example values that will need to be set in the Cloudflare dashboard
+GITHUB_TOKEN = "dummy-token"
+ANTHROPIC_API_KEY = "dummy-key"
+BRAVE_SEARCH_API_KEY = "dummy-key"
+GITHUB_WEBHOOK_SECRET = "dummy-secret"
+
+[build]
+command = "npm run build" 

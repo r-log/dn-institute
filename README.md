@@ -1,5 +1,77 @@
 Distributed Networks Institute (DNI) aims to help infrastructure resilience and financial health of distributed networks through scientific, engineering, and educational efforts. We are a part of a 501(c)3 non-profit incubator in Washington, DC called [BlockShop](https://blockshop.org/). Constantly on the lookout for talent, we encourage anyone to contribute code, market analysis, and engineering expertise to one of our [active projects](https://dn.institute/#projects). Multiple research grants and [code bounties](https://github.com/1712n/dn-institute/labels/%F0%9F%92%B0%20bounty) are available.
 
+## 🚀 Recent Updates: Cloudflare Worker Implementation
+
+We've recently migrated our article checking and analysis services to Cloudflare Workers, bringing improved reliability, scalability, and performance. Key features include:
+
+- Automated article quality checking using Claude AI
+- Enhanced duplicate content detection
+- Market health report generation
+- Robust GitHub webhook integration
+- Rate limiting and request validation
+- Comprehensive test coverage
+
+### Prerequisites for Worker Development
+
+- Node.js v20 or later
+- Python 3.8 or later
+- Cloudflare Workers account
+- Required API keys:
+  - GitHub Token
+  - Anthropic Claude API Key
+  - Brave Search API Key
+  - RapidAPI Key (for market data)
+
+### Worker Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Set up environment variables:
+   Create a `.dev.vars` file with:
+
+```
+GITHUB_TOKEN=your_github_token
+ANTHROPIC_API_KEY=your_claude_api_key
+BRAVE_SEARCH_API_KEY=your_brave_search_key
+GITHUB_WEBHOOK_SECRET=your_webhook_secret
+```
+
+3. Install Python dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Development Commands
+
+```bash
+# Start development server
+npm run dev
+
+# Run tests
+npm test
+
+# Deploy to Cloudflare Workers
+npm run deploy
+```
+
+### Project Structure
+
+```
+├── src/
+│   ├── worker.ts              # Main worker entry point
+│   └── services/              # Service implementations
+├── test/                      # Test files
+├── tools/                     # Python tools
+│   ├── article_checker/       # Article checking scripts
+│   └── market_health_reporter/# Market report generation
+└── .devcontainer/            # Development container config
+```
+
 ## 🏆 Challenge Program
 
 [![Challenge Program Video](https://blockshopdc.com/static/assets/images/challenge.jpg)](https://link.hygge.work/MayaVick_Challenge)

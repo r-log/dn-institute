@@ -29,10 +29,6 @@ RUN apt-get update && apt-get install -y ca-certificates openssl git curl && \
 # Hugo dev server port
 EXPOSE 1313
 
-# [Optional] Uncomment this section to install additional OS packages you may want.
-#
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
-
-# [Optional] Uncomment if you want to install more global node packages
-# RUN sudo -u node npm install -g <your-package-list-here>
+# Add additional development tools
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends jq

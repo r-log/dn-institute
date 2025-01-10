@@ -4,13 +4,15 @@
 Count characters in a Github PR diff, calculate the contribution remuneration and comment on the PR.
 """
 
-import os, argparse
+import os
+import argparse
 import yaml
 from github import Github, GithubException
 from tools.python_modules.utils import logging_decorator
 from tools.python_modules.git import get_pull_request, get_diff_by_url, parse_diff
 
 data = {}
+
 
 def parse_cli_args():
     """
@@ -35,7 +37,9 @@ def parse_cli_args():
     )
     return parser.parse_args()
 
+
 args = parse_cli_args()
+
 
 def load_config() -> dict:
     """
@@ -90,6 +94,7 @@ def count_chars(diff: list[dict]) -> int:
 
     return chars
 
+
 def calc_payout(chars, rate, multiplier, fixed=None):
     if fixed is not None:
         payout = fixed
@@ -100,6 +105,7 @@ def calc_payout(chars, rate, multiplier, fixed=None):
     payout = "{:.2f}".format(round(payout, 2))
     return payout
 
+
 @logging_decorator("Comment on PR")
 def create_comment(
     pull_request,
@@ -109,19 +115,14 @@ def create_comment(
     chars: int,
     value: float
 ) -> None:
-    """
-    Create a comment on a Github PR.
-    """
-
-    author = pull_request.user.login
-    url = pull_request.diff_url
-    comment = f"Thanks, @{author}! {chars} characters were added/changed in this [PR]({url}). At a rate of {rate}¢/char multiplied by {multiplier}x your contribution is worth ${value}. @{payeer} will process your payment."
-
+    comment = f"## Payout calculation\n\n"
+    comment += f"- Characters: {chars}\n"
+    comment += f"- Rate: {rate} USD per 1000 chars\n"
+    comment += f"- Multiplier: {multiplier}\n"
+    comment += f"- Value: {value} USD\n"
+    comment += f"- Payeer: {payeer}\n"
     print(comment)
-
-    # only post comment if running on Github
-    if os.environ.get("GITHUB_ACTIONS") == "true":
-        pull_request.create_issue_comment(comment)
+    pull_request.create_issue_comment(comment)
 
 
 def main():
@@ -132,5 +133,6 @@ def main():
     _diff = get_diff_by_url(pr)
     diff = parse_diff(_diff)
     data["chars"] = count_chars(diff)
-    data["value"] = calc_payout(chars=data["chars"], rate=config["rate"], multiplier=config["multiplier"], fixed=args.fixed)
+    data["value"] = calc_payout(chars=data["chars"], rate=config["rate"],
+                                multiplier=config["multiplier"], fixed=args.fixed)
     create_comment(pr, **config, **data)

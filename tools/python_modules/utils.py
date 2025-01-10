@@ -24,19 +24,11 @@ def execute(cmd: list[str], config: dict = default_subprocess_config):
 def logging_decorator(group_name):
     def decorator_wrapper(original_func):
         def wrapper_func(*func_args, **func_kwargs):
-            if os.environ.get("GITHUB_ACTIONS") == "true":
-                print(f"::group::{group_name}")
-                result = original_func(*func_args, **func_kwargs)
-                print("::endgroup::")
-            else:
-                print(f"=={group_name}==\n")
-                result = original_func(*func_args, **func_kwargs)
-                print("\n==End==\n\n")
-
+            print(f"=={group_name}==\n")
+            result = original_func(*func_args, **func_kwargs)
+            print("\n==End==\n\n")
             return result
-
         return wrapper_func
-
     return decorator_wrapper
 
 
