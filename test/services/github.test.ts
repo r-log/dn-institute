@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { GitHubService } from "../../src/services/github"
+import { GitHubService } from "../../cloudflare-worker/services/github"
 import { mockEnv } from "../setup"
 import { server, http } from "../setup"
 

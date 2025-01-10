@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { BraveSearchService } from "../../src/services/brave-search"
+import { BraveSearchService } from "../../cloudflare-worker/services/brave-search"
 import { mockEnv } from "../setup"
 import { server, http } from "../setup"
 

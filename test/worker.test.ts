@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from "vitest"
-import worker from "../src/worker"
+import worker from "../cloudflare-worker/worker"
 import { mockEnv } from "./setup"
 import { server, http } from "./setup"
 import { ExecutionContext } from "@cloudflare/workers-types"

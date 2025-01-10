@@ -1,5 +1,5 @@
 name = "article-checker-worker"
-main = "src/worker.ts"
+main = "cloudflare-worker/worker.ts"
 compatibility_date = "2024-01-09"
 compatibility_flags = ["nodejs_compat"]
 

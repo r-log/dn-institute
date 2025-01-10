@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { ClaudeService } from "../../src/services/claude"
+import { ClaudeService } from "../../cloudflare-worker/services/claude"
 import { mockEnv } from "../setup"
 import { server, http } from "../setup"
 

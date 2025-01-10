@@ -11,6 +11,6 @@
     "skipLibCheck": true,
     "baseUrl": "."
   },
-  "include": ["src/**/*"],
+  "include": ["cloudflare-worker/**/*"],
   "exclude": ["node_modules"]
 } 

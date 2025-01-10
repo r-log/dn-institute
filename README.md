@@ -62,14 +62,14 @@ npm run deploy
 ### Project Structure
 
 ```
-├── src/
-│   ├── worker.ts              # Main worker entry point
-│   └── services/              # Service implementations
-├── test/                      # Test files
-├── tools/                     # Python tools
-│   ├── article_checker/       # Article checking scripts
+├── cloudflare-worker/        # Cloudflare Worker implementation
+│   ├── worker.ts            # Main worker entry point
+│   └── services/            # Service implementations
+├── test/                    # Test files
+├── tools/                   # Python tools
+│   ├── article_checker/     # Article checking scripts
 │   └── market_health_reporter/# Market report generation
-└── .devcontainer/            # Development container config
+└── .devcontainer/          # Development container config
 ```
 
 ## 🏆 Challenge Program
