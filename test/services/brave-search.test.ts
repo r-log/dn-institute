@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest"
+import { describe, it, expect, beforeEach } from "vitest"
 import { BraveSearchService } from "../../cloudflare-worker/services/brave-search"
 import { mockEnv } from "../setup"
 import { server, http } from "../setup"
@@ -119,6 +119,28 @@ describe("BraveSearchService", () => {
   })
 
   describe("factCheck", () => {
+    beforeEach(() => {
+      // Set up default mock response for all factCheck tests
+      server.use(
+        http.get("https://api.search.brave.com/res/v1/web/search", () => {
+          return Response.json({
+            web: {
+              results: [
+                {
+                  title: "Test Result",
+                  url: "https://test.com",
+                  description: "A matching result"
+                }
+              ]
+            },
+            mixed: {
+              main: [{ type: "web" }]
+            }
+          })
+        })
+      )
+    })
+
     it("should process multiple claims", async () => {
       const content =
         "This is a substantial claim about testing. Another significant claim about verification. A third important claim about validation."
