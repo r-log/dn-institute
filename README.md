@@ -2,8 +2,6 @@ Distributed Networks Institute (DNI) aims to help infrastructure resilience and 
 
 ## 🚀 Recent Updates: Cloudflare Worker Implementation
 
-We've recently migrated our article checking and analysis services to Cloudflare Workers, bringing improved reliability, scalability, and performance. Key features include:
-
 - Automated article quality checking using Claude AI
 - Enhanced duplicate content detection
 - Market health report generation
